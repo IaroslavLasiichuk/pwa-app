@@ -9,7 +9,7 @@ This is a text editor web application that allows developers to create and save 
 
 ## Link to deployed application on Heroku
 
-[Link to application](https://coding-boot-camp.github.io/full-stack/heroku/heroku-deployment-guide).
+Link to deployed application [Click](https://blooming-brushlands-84542.herokuapp.com/)
 
 ## Usage
 
