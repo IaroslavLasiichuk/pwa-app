@@ -2,6 +2,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 const { InjectManifest } = require('workbox-webpack-plugin');
 const WorkboxPlugin = require('workbox-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require('path');
 // TODO: Add and configure workbox plugins for a service worker and manifest file.
 // TODO: Add CSS loaders and babel to webpack.
@@ -12,7 +13,8 @@ module.exports = () => {
     mode: 'development',
     entry: {
       main: './src/js/index.js',
-      install: './src/js/install.js'
+      install: './src/js/install.js',
+      editor: './src/js/editor.js',
     },
     // Output for our bundles
     output: {
@@ -29,6 +31,15 @@ module.exports = () => {
           swSrc: './src-sw.js',
           swDest: 'src-sw.js',
         }),
+        // Webpack configuration to copy the favicon file from the src directory to the dist directory
+        new CopyWebpackPlugin({
+          patterns: [
+            {
+              from: './favicon.ico',
+              to: 'favicon.ico',
+            },
+          ],
+        }),
       new WorkboxPlugin.GenerateSW(),
 
       new WebpackPwaManifest({
@@ -41,6 +52,7 @@ module.exports = () => {
         theme_color: '#225ca3',
         start_url: './',
         publicPath: './',
+        scope: './',
         icons: [
           {
             src: path.resolve('src/images/logo.png'),
